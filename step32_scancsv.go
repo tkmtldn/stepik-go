@@ -5,27 +5,30 @@ package main
 // незакончено
 
 import (
+	"bufio"
 	"fmt"
+	"io"
+	"os"
 	"strconv"
 	"strings"
 )
 
 func main() {
-	var s,ans string
-	var first_v, second_v float64
-	for i:=0; i<3; i++ {
-		fmt.Scan(&s)
-		ans += s
+	in, err := bufio.NewReader(os.Stdin).ReadString('\n')
+	if err != nil && err != io.EOF {
+		fmt.Print(err)
 	}
-	ans = strings.Replace(ans, ";", " ", 1)
-	testArray := strings.Fields(ans)
-	first := strings.Replace(testArray[0], ",", ".",1)
-	second := strings.Replace(testArray[1], ",", ".",1)
+	var first_v, second_v float64
+	new_s := strings.Replace(in, " ", "", -1)
+	new_s = strings.Replace(new_s, ";", " ", 1)
+	new_s = strings.Replace(new_s, ",", ".", -1)
 
-	if s, err := strconv.ParseFloat(first, 64); err == nil {
+	testArray := strings.Fields(new_s)
+
+	if s, err := strconv.ParseFloat(testArray[0], 64); err == nil {
 		first_v = s
 	}
-	if s, err := strconv.ParseFloat(second, 64); err == nil {
+	if s, err := strconv.ParseFloat(testArray[1], 64); err == nil {
 		second_v = s
 	}
 
