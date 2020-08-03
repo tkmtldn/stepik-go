@@ -48,7 +48,6 @@ func merge2Channels(fn func(int) int, in1 <-chan int, in2 <-chan int, out chan<-
 		m.Unlock()
 		data := fn(val)
 		s[p] = data
-
 	}
 
 	for i := 0; i < n; i++ {
